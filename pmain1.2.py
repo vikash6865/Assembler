@@ -142,7 +142,7 @@ def check_directive(x) :                    #program to check for data directive
     return False                            #function returns if data directive not found
 
 
-def assemble(x) :
+def assemble(x) :                           #function to process each line read from file
     global end_flag
     x=x.lower()
     n = 0
