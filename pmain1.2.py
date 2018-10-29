@@ -116,7 +116,8 @@ def error(x, y) :                           #function to flash error
 
 
 def calc_inst_size(instruction) :
-    
+    if instruction == "add" :
+        x = 1
 
 
 def check_directive(x) :                    #program to check for data directive
@@ -128,7 +129,13 @@ def check_directive(x) :                    #program to check for data directive
             pos = x.find(dt)
             var = x[0:pos].strip()          #var holds name of variable
             var1 = x[pos+3:len(x)].strip()  #var1 holds data values 
-            n = var1.count(',') + 1         #n holds number of data values to be stored in single data directive
+            var2 = 0
+            if "dup(?)" in var1 :           #check whether dup operator exists or not
+                pos = var1.find("dup(?)")
+                var2 = var1[0:pos].strip()
+                n = int(var2)
+            else :
+                n = var1.count(',') + 1         #n holds number of data values to be stored in single data directive
             dt = dt.strip()
             search_sym_table(var, dt, n)    #var passed to search for finding if there is previously defined var
             return True
@@ -170,6 +177,9 @@ def assemble(x) :
                     mt = " "+mt+" "
                     if mt in x :
                         if check_start() :               #to check wheteher start label is declared or not 
+                            pos = x.find(mt)
+                            mt = mt.strip()
+
                             calc_inst_size(mt)
                         else :
                             error("", 1)                 #flashes error if START label is missing

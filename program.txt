@@ -1,8 +1,8 @@
 ;Program to add elements of double word array
 
 data SEGMENT
+    RESU DD 150 dup(?)                                 ;declaring result variable
     ARRAY DD 12345678H, 00004567H, 00004321H ;declaring and storing double word elements in in array 
-    RESU DD ?                                 ;declaring result variable
 data ENDS
 code SEGMENT
     ASSUME CS:code DS:data
