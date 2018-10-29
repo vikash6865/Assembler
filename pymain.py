@@ -23,7 +23,7 @@ sym = []
 def search_sym_table(var, var_type, n) :      #function to check whether the symbol exists
     global loc
     global offset
-    global end_flag
+    #global end_flag
     offset = loc
     if " " in var :
         var = var.replace(" ", "!")
@@ -31,13 +31,13 @@ def search_sym_table(var, var_type, n) :      #function to check whether the sym
     if var not in sym :
         if var_type == "segment" :            #checking for segment in symbol table
                 for x in sym :
-                    if (var_type in x) & (end_flag > 0) :
+                    if (var_type in x):
                         loc = 0
                     else :
                         error("",2)    
                 offset = loc
                 loc = offset
-                end_flag+=1
+                #end_flag+=1
                 segment = "\titself"
         elif var_type == "db" :
             var_type = "Byte"
@@ -63,12 +63,12 @@ def search_sym_table(var, var_type, n) :      #function to check whether the sym
     sym.append(sym_table(var.lstrip(), offset, segment, var_type))
 
 def print_sym_table() :                     #to print symbol table
-    print("\t",'='*72)
+    print("\t",'='*70)
     print("        |     Symbol\t| Offset |       Segment    \t|         Type\t\t|")
-    print("\t",'='*72)
+    print("\t",'='*70)
     for i in sym :
         print("\t| ",i.var,"\t| ", i.offset,"H\t |", i.segment,"\t\t| ", i.var_type,"\t\t|")
-    print("\t",'='*72)
+    print("\t",'='*70)
     # f = open("out.txt","w")
     # f.write()
 

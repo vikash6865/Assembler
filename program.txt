@@ -1,22 +1,24 @@
-;Evaluating expression(X+Y+24H-Z) using byte data 
+;Program to add elements of double word array
 
 data SEGMENT
-	X DB	11H
-	Y DB	12H
-	Z DW	30H
-	res DD 	?
+    ARRAY DD 12345678H, 00004567H, 00004321H ;declaring and storing double word elements in in array 
+    RESU DD ?                                 ;declaring result variable
 data ENDS
-
 code SEGMENT
-	ASSUME	CS:code DS:data
-	
+    ASSUME CS:code DS:data
 START:
-	MOV AX,data
-	MOV DS,AX
-	MOV AL,X
-	ADD AL,Y
-	ADD AL,24H
-	SUB AL,Z
-	MOV res,AL
+        MOV AX,data                          ;initializing data SEGMENT
+        MOV DS,AX
+        MOV SI, 0
+        MOV CX, 3
+        MOV AX, 0
+
+addarray:
+        ADD AX, word ptr ARRAY[SI]
+        ADC DX, word ptr ARRAY[SI]+2
+        ADD SI, 4
+        LOOP addarray
+        MOV word ptr RESU, AX
+        MOV word ptr RESU+2,DX
 code ENDS
-	END START
+        END START

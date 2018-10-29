@@ -1,0 +1,6 @@
+this is the project of pass1 of assembler 
+
+we have done the code on a online compiler because dev ang g++ compilers is having troubles including the regex file.
+
+
+platform where we have done the coding- "www.repl.it"
