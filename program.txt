@@ -1,7 +1,7 @@
 ;Program to add elements of double word array
 
 data SEGMENT
-    RESU DD 150 dup(?)                                 ;declaring result variable
+    RESU DD ?                                 ;declaring result variable
     ARRAY DD 12345678H, 00004567H, 00004321H ;declaring and storing double word elements in in array 
 data ENDS
 code SEGMENT
@@ -9,16 +9,19 @@ code SEGMENT
 START:
         MOV AX,data                          ;initializing data SEGMENT
         MOV DS,AX
-        MOV SI, 0
-        MOV CX, 3
-        MOV AX, 0
+        MOV SI, 0H
+        MOV CX, 3H
+        MOV AX, 0H
 
 addarray:
         ADD AX, word ptr ARRAY[SI]
         ADC DX, word ptr ARRAY[SI]+2
-        ADD SI, 4
+        ADD SI, 4H
         LOOP addarray
         MOV word ptr RESU, AX
         MOV word ptr RESU+2,DX
+
+test:
+        ADD BX,SI 
 code ENDS
         END START
